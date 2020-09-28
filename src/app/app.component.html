@@ -1,0 +1,26 @@
+
+<!-- log in form -->
+
+<div *ngIf="opened">
+<mat-card class="mat-card" style="width:300px; height:200px; margin-left:600px; margin-top: 300px;">
+  <form [formGroup]="registerForm" #myForm="ngForm" (ngSubmit)="onSubmit()">
+      <!-- username -->
+          <label>UserName</label>
+          <br>
+          <input formControlName="username"/>
+      <br>
+      <!-- password -->
+          <label>Password</label>
+          <br>
+          <input formControlName="password"/>
+      <br>
+      <br>
+         <button type="submit" [routerLink]="['/dashboard']" style="margin-left: 100px;">Login</button>
+  </form>
+</mat-card>
+</div>
+ 
+
+<!-- routing -->
+
+<router-outlet></router-outlet>

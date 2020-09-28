@@ -1,0 +1,152 @@
+<!-- toolbar -->
+<div>
+    <mat-toolbar>
+      <span class="material-icons">list</span>
+      <span style="margin-left:600px;">Idea to Growth</span>
+      <span class="example-spacer"></span>
+      <span class="material-icons" style="margin-left:500px">mail</span>
+      <span class="material-icons" style="margin-left:100px">face</span>  
+    </mat-toolbar>
+   </div>
+
+<mat-drawer-container class="example-container">
+    <mat-drawer mode="side" opened>
+         <!-- code for hide and show component -->
+         <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="btn-group">
+                        <div class="btn btn-dark"
+                            (click)="showDiv.previous = !showDiv.previous;showDiv.current = false;showDiv.next = false">
+                            Dashboard
+                        </div>
+                        <div class="btn btn-outline-secondary"
+                            (click)="showDiv.current = !showDiv.current;showDiv.previous = false;showDiv.next = false">
+                            Project List
+                        </div>
+                        <div class="btn btn-dark" (click)="showDiv.next = !showDiv.next;showDiv.previous = false;showDiv.current = false">
+                            New Idea
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </mat-drawer>
+    <mat-drawer-content style="margin-left: 100px;">
+        <div class="row">
+            <div *ngIf="showDiv.previous">
+                <div>
+                    <p>showing dashboard data</p>
+                        <!-- donut chart -->
+                    <div style="display: inline-block; margin-right: 30px;">
+                        <mat-card style="width: 400px; height: 400px;">
+                        <div [hidden]="!chart" style="margin-top:100px;">
+                            <canvas id="canvas" style="width: 300px; height:100px"></canvas>
+                        </div>
+                        </mat-card>
+                    </div>
+                    <!-- bar chart -->
+                    <div style="display: inline-block;">
+                        <mat-card style="width: 400px; height: 400px;">
+                        <div [hidden]="!chart" style="margin-top:100px;">
+                            <canvas id="canvasbar" style="width: 300px; height:100px; margin-top: 30px;"></canvas>
+                        </div>
+                        </mat-card>
+                    </div> 
+                    </mat-drawer-content>
+                </mat-drawer-container>
+                </div>
+                </div>
+            </div>
+            <div *ngIf="showDiv.next"><p>project list data</p>
+                <!-- table -->
+
+              <mat-form-field>
+                <mat-label>Filter</mat-label>
+                <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
+              </mat-form-field>
+
+              <table class="table table-striped">
+                <tbody>
+                   <tr *ngFor="let data of data">
+                    <td>{{data.tests}}</td>
+                    <td>{{data.business}}</td>
+                    <td>{{data.quality}}</td>
+                    <td>{{data.tdr}}</td>
+                   </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div *ngIf="showDiv.current"><p>new idea</p>
+                
+                    <form (ngSubmit)="onSubmit()" class="form-group">
+                        <!-- enter new project name -->
+                        <p style="margin-left:400px;">New Idea</p>
+                        <div>
+                            <label>Enter New Project Theme</label>
+                            <input [(ngModel)]="projectTheme" style="width: 400px; height:40px"/>
+                        </div>
+                        <br>
+                        <!-- roots -->
+                        <div style="display: inline-block; margin-right: 90px; margin-top: 20px;">
+                            <label>Roots</label>
+                            <input [(ngModel)]="roots"/>
+                        </div>
+                        <br>
+                        <!-- type -->
+                        <div style="display: inline-block; margin-right: 90px; margin-top: 20px;">
+                        <label>Types</label>
+                        <input [(ngModel)]="type"/>
+                        </div>
+                        <br>
+                        <!-- division -->
+                        <div style="display: inline-block; margin-right: 90px; margin-top: 20px;">
+                        <label>Division</label>
+                        <input [(ngModel)]="division"/>
+                        </div>
+                        <br>
+                        <!-- category -->
+                        <div style="display: inline-block; margin-right: 90px; margin-top: 20px;">
+                        <label>Category</label>
+                        <input [(ngModel)]="category"/>
+                        </div>
+                        <br>
+                        <!-- 4M -->
+                        <div style="display: inline-block; margin-right: 90px; margin-top: 20px;">
+                        <label>4M</label>
+                        <input [(ngModel)]="m"/>
+                        </div>
+                        <br>
+                        <!-- department -->
+                        <div style="display: inline-block; margin-right: 90px; margin-top: 20px;">
+                        <label>Department</label>
+                        <input [(ngModel)]="department"/>
+                        </div>
+                        <br>
+                        <!-- business plan: start date to end date -->
+                        <div style="display: inline-block; margin-left: 100px; margin-top: 20px;">
+                        <label>Business Plan: Start date to End date</label>
+                        <input [(ngModel)]="businessPlan" style="width: 200px; height:40px; margin-right: 100px;"/>
+                        </div>
+                        <br>
+                        <!-- location -->
+                        <div class="form-group" style="display: inline-block; margin-left: 100px; margin-top: 20px; ">
+                        <label>Location</label>
+                        <input [(ngModel)]="location"/>
+                        </div>
+                        <br>
+                        <!-- project need -->
+                        <div>
+                        <label>Project Need (Optional)</label>
+                        <input [(ngModel)]="projectNeed" type="text" formControlName="projectNeed" style="width: 400px; height:40px"/>
+                        </div>
+                        <br>
+                        <div class="form-group" style="margin-left: 300px;">
+                        <button (click)="login({'username':username,'password':password})">Login</button>
+                        </div>
+                    </form>
+            </div>
+        </div> 
+    </mat-drawer-content>
+  </mat-drawer-container>
